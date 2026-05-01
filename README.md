@@ -1,10 +1,3 @@
----
-marp: true
----
-<style>
-img { display: block; margin: 0 auto; }
-</style>
-
 # Introduction to Terraform
 
 
