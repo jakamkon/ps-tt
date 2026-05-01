@@ -31,4 +31,4 @@ Your task: determine the most efficient way to **provision and manage infrastruc
 ---
 # Application Architecture Overview
 
-![Diagram showing the full architecture of the LLM-based financial analysis web application](media/example_app_architecture.png)
+![Diagram showing the full architecture of the LLM-based financial analysis web application](media/example_app_architecture_small.jpg)
