@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Demo1.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+pre code.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 1em
+}
+code.hljs {
+  padding: 3px 5px
+}
+/*!
+  Theme: GitHub
+  Description: Light theme as seen on github.com
+  Author: github.com
+  Maintainer: @Hirse
+  Updated: 2021-05-15
+
+  Outdated base version: https://github.com/primer/github-syntax-light
+  Current colors taken from GitHub's CSS
+*/
+.hljs {
+  color: #24292e;
+  background: #ffffff
+}
+.hljs-doctag,
+.hljs-keyword,
+.hljs-meta .hljs-keyword,
+.hljs-template-tag,
+.hljs-template-variable,
+.hljs-type,
+.hljs-variable.language_ {
+  /* prettylights-syntax-keyword */
+  color: #d73a49
+}
+.hljs-title,
+.hljs-title.class_,
+.hljs-title.class_.inherited__,
+.hljs-title.function_ {
+  /* prettylights-syntax-entity */
+  color: #6f42c1
+}
+.hljs-attr,
+.hljs-attribute,
+.hljs-literal,
+.hljs-meta,
+.hljs-number,
+.hljs-operator,
+.hljs-variable,
+.hljs-selector-attr,
+.hljs-selector-class,
+.hljs-selector-id {
+  /* prettylights-syntax-constant */
+  color: #005cc5
+}
+.hljs-regexp,
+.hljs-string,
+.hljs-meta .hljs-string {
+  /* prettylights-syntax-string */
+  color: #032f62
+}
+.hljs-built_in,
+.hljs-symbol {
+  /* prettylights-syntax-variable */
+  color: #e36209
+}
+.hljs-comment,
+.hljs-code,
+.hljs-formula {
+  /* prettylights-syntax-comment */
+  color: #6a737d
+}
+.hljs-name,
+.hljs-quote,
+.hljs-selector-tag,
+.hljs-selector-pseudo {
+  /* prettylights-syntax-entity-tag */
+  color: #22863a
+}
+.hljs-subst {
+  /* prettylights-syntax-storage-modifier-import */
+  color: #24292e
+}
+.hljs-section {
+  /* prettylights-syntax-markup-heading */
+  color: #005cc5;
+  font-weight: bold
+}
+.hljs-bullet {
+  /* prettylights-syntax-markup-list */
+  color: #735c0f
+}
+.hljs-emphasis {
+  /* prettylights-syntax-markup-italic */
+  color: #24292e;
+  font-style: italic
+}
+.hljs-strong {
+  /* prettylights-syntax-markup-bold */
+  color: #24292e;
+  font-weight: bold
+}
+.hljs-addition {
+  /* prettylights-syntax-markup-inserted */
+  color: #22863a;
+  background-color: #f0fff4
+}
+.hljs-deletion {
+  /* prettylights-syntax-markup-deleted */
+  color: #b31d28;
+  background-color: #ffeef0
+}
+.hljs-char.escape_,
+.hljs-link,
+.hljs-params,
+.hljs-property,
+.hljs-punctuation,
+.hljs-tag {
+  /* purposely ignored */
+  
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h2 id="creating-s3-buckets-with-versioning-deletion-protection-in-aws-console">Creating S3 Buckets with Versioning (deletion protection) in AWS Console</h2>
+<p><strong>1. Open the AWS Management Console and go to S3</strong> <a href="https://loom.com/share/0fa19c2a807b4797b0afb070a7061c93?t=75">1:15</a></p>
+<p><img src="https://loom.com/i/c3e15878976046a2805e93d5bfcdd463?workflows_screenshot=true" alt="generated-image-at-00:01:15"></p>
+<ul>
+<li>Start by signing in to the <strong>AWS Management Console</strong> ar <strong>https://aws.amazon.com</strong></li>
+<li>Use the AWS web interface to access your account.</li>
+<li>From the console search bar, type <strong>S3</strong> and open the <strong>S3 service</strong>.</li>
+<li>This is where you can view and manage S3 buckets in the account.</li>
+</ul>
+<p><strong>2. Create the first S3 bucket</strong> <a href="https://loom.com/share/0fa19c2a807b4797b0afb070a7061c93?t=213">3:33</a></p>
+<p><img src="https://loom.com/i/ac4139f5954143199a65a7c3e4102cde?workflows_screenshot=true" alt="generated-image-at-00:03:33"></p>
+<ul>
+<li>Click <strong>Create bucket</strong>.</li>
+<li>Enter a bucket name, such as <strong>demo-pl-bucket-1</strong>. Replace 1 with a unique ID.</li>
+<li>Leave most settings at their default values.</li>
+<li>Scroll to <strong>Versioning</strong> and enable it.</li>
+<li>Create the bucket.</li>
+</ul>
+<p><strong>3. Create the second S3 bucket with the same settings</strong> <a href="https://loom.com/share/0fa19c2a807b4797b0afb070a7061c93?t=289">4:49</a></p>
+<p><img src="https://loom.com/i/a6b23fb6c152435f83b539b309ce99df?workflows_screenshot=true" alt="generated-image-at-00:04:49"></p>
+<ul>
+<li>Click <strong>Create bucket</strong> again.</li>
+<li>Enter a second name, such as <strong>demo-pl-bucket-2</strong>. Replace 1 with a unique ID.</li>
+<li>Keep the configuration the same as the first bucket.</li>
+<li>Enable <strong>Versioning</strong>.</li>
+<li>Create the bucket.</li>
+</ul>
+<p><strong>4. Create the third S3 bucket with versioning enabled</strong> <a href="https://loom.com/share/0fa19c2a807b4797b0afb070a7061c93?t=309">5:09</a></p>
+<p><img src="https://loom.com/i/4840d5dfea9844309ab236d7eebb9a68?workflows_screenshot=true" alt="generated-image-at-00:05:09"></p>
+<ul>
+<li>Create a third bucket, such as <strong>demo-pl-bucket-3</strong>. Replace 3 with a unique ID.</li>
+<li>Use the same general setup as the previous buckets.</li>
+<li>Enable <strong>Versioning</strong> before creating it.</li>
+<li>At this point, you have three S3 buckets intended for financial files.</li>
+</ul>
+<p><strong>5. Verify the buckets and their configuration manually</strong> <a href="https://loom.com/share/0fa19c2a807b4797b0afb070a7061c93?t=373">6:13</a></p>
+<p><img src="https://loom.com/i/d7432e6aac014e98a536170e60b72f52?workflows_screenshot=true" alt="generated-image-at-00:06:13"></p>
+<ul>
+<li>Sort or review the bucket list by <strong>Creation Date</strong> to confirm the three buckets exist.</li>
+<li>Open each bucket individually.</li>
+<li>Check the <strong>Properties</strong> section to confirm whether <strong>Versioning</strong> is enabled.</li>
+<li>This manual verification is necessary because the console does not provide a simple high-level overview of all bucket settings at once.</li>
+</ul>
+<p><strong>6. Understand the risks of manual infrastructure management</strong> <a href="https://loom.com/share/0fa19c2a807b4797b0afb070a7061c93?t=472">7:52</a></p>
+<p><img src="https://loom.com/i/9371712a0fe24f69afba102ba35583f0?workflows_screenshot=true" alt="generated-image-at-00:07:52"></p>
+<ul>
+<li>Manual setup becomes <strong>time-consuming</strong> as the number of buckets increases.</li>
+<li>It is <strong>error-prone</strong>: one missed step can leave a bucket without versioning</li>
+<li>Missing versioning will remove the intended protection against accidental deletion.</li>
+<li>As the number of resources and configuration options grows, managing infrastructure this way becomes increasingly difficult.</li>
+</ul>
+<p><strong>7. Recognize the challenge of reproducing the same setup elsewhere</strong> <a href="https://loom.com/share/0fa19c2a807b4797b0afb070a7061c93?t=577">9:37</a></p>
+<p><img src="https://loom.com/i/6f198aace2f34002a56c4b7e0e10840f?workflows_screenshot=true" alt="generated-image-at-00:09:37"></p>
+<ul>
+<li>If you need to recreate the same buckets in another AWS account or environment, you must repeat the steps manually.</li>
+<li>The console does not automatically document the exact configuration process for you.</li>
+<li>This makes replication across environments slow and prone to mistakes.</li>
+<li>The overall takeaway is that manual cloud resource management does not scale well.</li>
+</ul>
+<h3 id="link-to-loom">Link to Loom</h3>
+<p><a href="https://loom.com/share/0fa19c2a807b4797b0afb070a7061c93">https://loom.com/share/0fa19c2a807b4797b0afb070a7061c93</a></p>
+
+</body>
+</html>
